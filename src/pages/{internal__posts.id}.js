@@ -8,19 +8,18 @@ const Property = ({ data }) => {
   console.log(node)
   return (
     <Layout>
-      <h1>{node.address.full}</h1>
-      {node.photos.map((photo, index) => (
-        <img src={photo} />
-      ))}
+      {node.address && <h1>{node.address.full}</h1>}
+      {node.photos && node.photos.map((photo, index) => <img src={photo} />)}
     </Layout>
   )
 }
 export default Property
 
 export const productQuery = graphql`
-  query($mlsId: Int!) {
-    property: internalPosts(mlsId: { eq: $mlsId }) {
+  query($id: String!) {
+    property: internalPosts(id: { eq: $id }) {
       mlsId
+      id
       address {
         city
         full
