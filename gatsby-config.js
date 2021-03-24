@@ -47,6 +47,11 @@ module.exports = {
 
         method: "get",
 
+        allowCache: true,
+        // if allowCache is true, then the cache will be purged after the
+        // specified amount of time
+        maxCacheDurationSeconds: 60 * 60 * 24,
+
         headers: {
           "Content-Type": "application/json",
         },

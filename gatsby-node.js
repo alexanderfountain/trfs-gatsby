@@ -8,6 +8,11 @@ exports.createPages = async ({ graphql, actions }) => {
           uid
         }
       }
+      property: allInternalPosts {
+        nodes {
+          mlsId
+        }
+      }
     }
   `)
     const pageTemplate = path.resolve("src/templates/page.js")
@@ -26,6 +31,18 @@ exports.createPages = async ({ graphql, actions }) => {
                 component: pageTemplate,
                 context: {
                     uid: node.uid,
+                },
+            })
+        }
+    })
+    const propertyTemplate = path.resolve("src/templates/property.js")
+    pages.data.property.nodes.forEach(node => {
+        if (node.mlsId !== null) {
+            createPage({
+                path: `/property/${node.mlsId}`,
+                component: propertyTemplate,
+                context: {
+                    mlsId: node.mlsId,
                 },
             })
         }
